@@ -1,0 +1,243 @@
+//1) class Number
+//   {
+//       int num;
+//   }
+//In the main function,
+//Number n1(8),n2(4),n3(20),n4(6),n5;
+//n5=n1-n2*n3/n4;
+
+#include<iostream>
+#include<conio.h>
+using namespace std;
+
+class Number
+{
+	int num;
+public:	Number()
+		{
+			cout<<"Default"<<endl;
+		}
+
+		void Display()
+		{
+			cout<<"Displaying private number"<<endl<<num;
+		}
+
+	
+		Number(int num)
+		{
+			this->num=num;
+		}
+
+		Number& operator-(Number &ref)
+		{
+			this->num=this->num-ref.num;
+			return *this;
+			//return Number(this->num-ref.num);
+		}
+
+		Number operator*(Number &ref)
+		{
+			return Number(this->num*ref.num);
+		}
+
+		Number operator/(Number &ref)
+		{
+			return Number(this->num/ref.num);
+		}
+
+		Number operator=(Number &ref)
+		{
+			return Number(this->num=ref.num);
+
+		}
+};
+int main()
+{
+	Number n1(2),n2(4),n3(20),n4(6),n5;
+	n5=n1-n2*n3/n4;  //n5=n1-n2*n3/n4;
+	n5.Display();
+	//getch();
+	system("pause");
+}
+
+
+
+
+//2) class sample
+//   {
+//	private:
+//		char ch;
+//	public:
+//		sample(char ch)
+//		{
+//			this->ch=ch;
+//		}
+//  };
+//
+//given above class.
+//
+//write a global function "display" which will access "ch" directly and display it.
+//call this function from main function.
+#include<iostream>
+using namespace std;
+class sample
+{ 
+	private:
+		char ch;
+			public: sample(char ch)
+				{
+				this->ch=ch;
+				}
+		 friend void display(sample &);
+};
+void display(sample &ref)
+{
+	cout<<ref.ch;
+
+}
+int main()
+{
+	sample s('a');
+	display(s);
+	system("pause");
+
+}
+
+
+
+
+//3) Given
+//
+//class Module1
+//{
+//	int duration;
+//	public:
+//		Module1(int k)
+//		{
+//			duration=k;
+//		}
+//};
+
+//class Module2
+//{
+//	int duration;
+//	public:
+//		Module2(int k)
+//		{
+//			duration=k;
+//		}
+//};		
+//	
+//write a global function "check" which will take 2 modules (i.e. Module1 and Module2 ) and check whether Modules are same or not.
+#include<iostream>
+using namespace std;
+class Module2;
+class Module1
+{
+	int duration;
+	public:
+		Module1(int k)
+		{
+			duration=k;
+		}
+		friend void check(Module1 &,Module2 &);
+};
+
+class Module2
+{
+	int duration;
+	public:
+		Module2(int k)
+		{
+			duration=k;
+		}
+		friend void check(Module1 &,Module2 &);
+};	
+
+void check(Module1 &ref,Module2 &ref1)
+{
+	if(ref.duration==ref1.duration)
+	{
+		cout<<"Module are equal";
+	}
+	else
+	{
+		cout<<"Module are not equal";
+	}
+	
+}
+
+int main()
+{
+	Module1 m(1000);
+	Module2 m1(1000);
+	check(m,m1);
+	system("pause");
+}
+
+
+
+
+
+
+//4) Define a class , write two member functions 
+//	void disp1(){ //some code }
+//	void disp2(){ // some code }
+//
+//	Try to call disp1   from    disp2. 
+#include<iostream>
+using namespace std;
+
+class nameee
+{ public:
+void disp()
+{
+cout<<"disp";
+}
+void disp1()
+{
+disp();
+cout<<"disp1";
+}
+
+};
+int main()
+{
+nameee s;
+s.disp();
+system("pause");
+}
+
+
+
+
+//5) Define a class with constructor and  member function
+//
+//	create object, call member function
+//	now create a reference to that object, and using that reference try to call member function
+#include<iostream>
+using namespace std;
+class assign
+{public:
+	assign()
+	{
+		cout<<"const"<<endl;
+	}
+
+	void disp()
+	{
+		cout<<"disp"<<endl;
+	}
+
+
+};
+int main()
+{
+	assign a;
+	a.disp();
+	assign &m1=a;
+	m1.disp();
+
+}
+

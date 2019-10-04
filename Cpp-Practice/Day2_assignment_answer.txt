@@ -1,0 +1,178 @@
+1) create a class with constructors and destructors.
+create array of instances and observe how program behaves.
+#include<iostream>
+using namespace std;
+class myclass
+{
+public :int a;
+		myclass()
+		{
+		cout<<"in const"<<endl;
+		}
+		~myclass()
+		{
+			cout<<"in destr"<<endl;
+		}
+};
+int main()
+{
+	myclass arr[5];
+	
+}
+
+
+
+//2) create a class with constructors and destructor.
+//create 2 instances on stack and 1 instance on heap. observe the invocation of constructors and destructors.
+
+#include<iostream>
+using namespace std;
+
+class Second
+{
+public: Second(int m)
+		{
+			static int i=1;
+			i++;
+			cout<<"In Constructor"<<m<<i<<endl;
+		}
+
+		~Second()
+		{
+			cout<<"In Destructor"<<endl;
+		}
+};
+
+int main()
+{
+	Second s(10);
+	Second m1=s;
+	Second *s1=new Second(20);
+	delete s1;
+}
+
+//3.create a class "myclass1"
+//with members and member function "disp1().
+//create another class "myclass2"
+//with members and member function "disp2().
+//now try to invoke disp1() from disp2()
+//in the main() function, create instances of both the classes and invoke their member functions.
+#include<iostream>
+using namespace std;
+class myclass1
+{ 
+public:
+	void disp1()
+	{
+		int a=1;
+		cout<<"disp1"<<a<<endl;
+	}
+};
+	
+class myclass2
+	{
+	public:
+
+	 void disp2(myclass1 &ref)
+	 {
+		 ref.disp1();
+		int c=1454;
+		cout<<"disp2"<<c<<endl;
+		}
+
+
+};
+int main()
+{
+	myclass1 s;
+	s.disp1();
+	myclass2 *t=new myclass2();
+	(*t).disp2(s);
+	t->disp2(s);
+
+
+}
+
+//4) create a class.
+//accept from user, how many instances are required.
+//Accordingly create array of instances dynamically.
+//Now make sure that u call destructor for each and every instances.
+
+#include<iostream>
+using namespace std;
+class fourth
+{
+public:	fourth()
+		{
+			static int a;
+			a++;
+			cout<<"Default constructor"<<a<<endl;
+		}
+
+
+	~fourth(){
+			static int a;
+			a++;
+			cout<<"Destructor"<<a<<endl;
+			}
+};
+int main()
+{
+	int a;
+	cout<<"How many instance are requied"<<endl;
+	cin>>a;
+	fourth *f=new fourth[a];
+	//delete []f;
+	//fourth m[4];//for static
+
+}
+
+
+
+//5) create a class, define different types of constructors. in main create n number of objects.
+//	At the end display how many constructors are created for a class.
+#include<iostream>
+using namespace std;
+
+class fifth
+{
+public:
+	fifth()
+	{
+		static int a=1;
+		a++;
+		cout<<"in const"<<a<<endl;
+	}
+
+	int num;
+	void getnum(int num)
+	{
+		this->num=num;
+	}
+
+	fifth(int a)
+	{
+	cout<<"in param"<<a<<endl;
+	}
+	~fifth()
+	{
+	cout<<"in dest"<<endl;
+	}
+
+	fifth(fifth &ref)
+	{
+		this->num=ref.num;
+		cout<<ref.num;
+	}
+};
+
+int main()
+{
+	while(true)
+	{
+	fifth *f=new fifth;
+	f.getnum(5);
+	fifth f2;
+	fifth f1(f);
+	}}
+

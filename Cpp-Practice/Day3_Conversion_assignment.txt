@@ -1,0 +1,202 @@
+//1) class Hour
+//{
+//	private:
+//		int hr;
+//	public:
+//		parameterized constructor
+//		disp method
+//}
+//class Minute
+//{
+//	private:
+//		int mnt;
+//	public:
+//		parameterized constructor
+//		disp method
+//}
+//
+//write a program to convert minutes to hours.
+//(Use operator= for conversion.)
+
+#include<iostream>
+using namespace std;
+class Minute;
+class Hour
+{
+	private:
+		int hr;
+	public:
+		Hour(int hr)
+		{
+			this->hr=hr;
+			cout<<"in param hr"<<endl;	
+		}
+
+void disp()
+{
+	cout<<hr<<endl;
+}
+Hour& operator=(Minute &);
+//friend Hour& operator=(Minute &);
+
+};
+class Minute
+{
+	private:
+		int mnt;
+	public:
+	Minute(int mnt)
+	{
+		this->mnt=mnt;
+		cout<<"in param"<<endl;
+	}
+	void disp1()
+{
+	cout<<mnt<<endl;
+}
+	int get()
+	{
+		return mnt;
+	}
+
+	
+//operator Hour()
+//{
+//	Hour h(mnt/60);
+//	return h;
+//	//return Hour(mnt/60);
+//}
+//friend Hour& operator=(Minute &);
+
+};
+
+Hour& Hour::operator=(Minute &ref)
+{
+	hr=ref.get()/60;
+	return *this;
+	}
+
+int main()
+{  
+	Hour he(100);
+   Minute me(120);
+	he=me;  //he.operator=(me);
+	//
+	he.disp();
+	me.disp1();
+	
+}
+
+
+
+//2)write a number class with
+//int num;
+//void disp(){}
+//
+//u should be able to do following
+//
+//number n1(20);
+//int k=-n1;
+//
+//n1+=5;
+//n1.disp()
+//
+//number n2(35);
+//if(n1!=n2)
+//{
+//	some message
+//}
+
+//number n3(12);
+//
+//if(n3 < n1)
+//{
+//	some message
+//}
+//
+//number n4;
+//
+//n4=n2*n3;
+#include<iostream>
+using namespace std;
+class number
+{
+	int num;
+public:
+	number(){num=0;}
+	number(int num)
+	{
+		this->num=num;
+	}
+
+	void display()
+	{
+		cout<<"IN DISPLAY\t"<<num<<endl;
+	}
+
+	
+	number& operator+=(int k)
+	{
+		num=num+k;
+		return *this;
+	}
+
+	bool operator!=(number &ref)
+	{
+		if (num==ref.num)
+		{	cout<<"Same to chame"; return 1;}
+		
+		else
+		{cout<<"chame chame";return 0;}
+		
+	}
+
+	bool operator<(number &ref)
+	{
+		if (num<ref.num)
+		{cout<<"LESSSSSS THANNNN";return 1;}
+		else
+		{cout<<"NOOO LESSS THANNNNN";return 0;}
+		
+	}
+
+	number operator*(number &ref)
+	{
+		return number(num*ref.num);
+	}
+
+	number& operator=(number &ref)
+	{
+		num=ref.num;
+		return *this;
+	}
+
+	operator int()
+	{
+		return num;
+	}
+};
+
+
+
+int main()
+{
+number n1(20);
+int k=-n1;
+cout<<k<<endl;
+n1+=5;
+n1.display();
+number n2(35);
+n2.display();
+number n3(12);
+n3.display();
+number n4;
+n4.display();
+n4=n2*n3;
+n4.display();
+n3 < n1;
+n1!=n2;
+}
+
+
+

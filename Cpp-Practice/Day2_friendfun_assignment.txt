@@ -1,0 +1,112 @@
+//1) class First
+//   {
+//      char str1[20];
+//   };
+//   class Second
+//   {  char str2[20];
+//   };
+//write a friend function,which will create a  new string containing str1,str2 and also display it.
+//
+
+#include<iostream>
+using namespace std;
+class Second;
+class First
+{
+	char str1[20];
+
+public:
+	First(char *ptr)
+	{
+		strcpy(str1,ptr);
+	}
+
+	friend void display(First &,Second &);
+};
+
+class Second
+{
+	char str2[20];
+public:
+	Second(char *ptr)
+	{
+		strcpy(str2,ptr);
+	}
+
+	friend void display(First &,Second &);
+	 
+};
+void display(First &ref,Second &ref1)
+{
+	char str3[40];
+	//str3[40]=strcat(ref.str1,ref.str2);
+	strcpy(str3,ref.str1);
+	strcat(str3,ref1.str2);
+	cout<<str3;
+}
+int main()
+{
+	First f("HELLO");
+	Second s("WORLD");
+	display(f,s);
+}
+
+
+
+
+
+//2) 
+//class First
+//{
+//	int a;
+//};
+//class Second
+//{
+//	public:
+//		void fun1(){}
+//		void fun2(){}
+//		void fun3(){}
+//};
+//
+//Above code is incomplete.
+//Make sure that all the member functions of "Second" will access "a".
+
+#include<iostream>
+using namespace std;
+//class Second;
+class First
+{
+	int a;
+public:
+	First(int a)
+	{
+		this->a=a;
+	}
+friend class Second;
+};
+
+class Second
+{
+public: void fun1(First &ref)
+		{
+			cout<<"Fun1="<<ref.a<<endl;
+		}
+		void fun2(First &ref)
+		{
+			cout<<"Fun2="<<ref.a<<endl;
+		}
+
+		void fun3(First &ref)
+		{
+			cout<<"Fun3="<<ref.a<<endl;
+		}
+};
+
+int main()
+{
+	First a(100),b(200),c(300);
+	Second s;
+	s.fun1(a);
+	s.fun2(b);
+	s.fun3(c);
+}
